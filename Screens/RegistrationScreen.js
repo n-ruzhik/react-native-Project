@@ -28,8 +28,8 @@ export const RegistrationScreen = () => {
           style={styles.container}
         >
           <View style={styles.containerForm}>
-            <View style={styles.registrationFormBox}>
-              <View style={styles.photoBox}>
+            <View style={styles.registrationFormThumb}>
+              <View style={styles.photoThumb}>
                 <Image
                   source={require("../assets/images/add.png")}
                   style={styles.addPhotoImg}
@@ -56,7 +56,7 @@ export const RegistrationScreen = () => {
               <View>
                 <TouchableOpacity>
                   <Text style={styles.textLogIn}>
-                    Already have account? Log In
+                    Already have an account? Log in
                   </Text>
                 </TouchableOpacity>
               </View>

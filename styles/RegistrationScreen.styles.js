@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
     position: "relative",
   },
 
-  registrationFormBox: {
+  registrationFormThumb: {
     flex: 1,
     position: "absolute",
     transform: [{ translateX: -196 }, { translateY: -115 }],
@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
     paddingLeft: 16,
   },
 
-  photoBox: {
+  photoThumb: {
     position: "absolute",
     top: 0,
     left: 0,
