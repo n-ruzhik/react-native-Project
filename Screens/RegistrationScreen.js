@@ -16,6 +16,15 @@ import { useFonts } from "expo-font";
 import { styles } from "../styles/RegistrationScreen.styles";
 
 export const RegistrationScreen = () => {
+  const [fontsLoaded] = useFonts({
+    RobotoRegular: require("../assets/fonts/Roboto-Regular.ttf"),
+    RobotoMedium: require("../assets/fonts/Roboto-Medium.ttf"),
+    RobotoBold: require("../assets/fonts/Roboto-Bold.ttf"),
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>

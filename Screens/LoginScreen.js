@@ -9,9 +9,19 @@ import {
   Keyboard,
   Platform,
 } from "react-native";
+import { useFonts } from "expo-font";
 import { styles } from "../styles/LoginScreen.styles";
 
 export const LoginScreen = () => {
+  const [fontsLoaded] = useFonts({
+    RobotoRegular: require("../assets/fonts/Roboto-Regular.ttf"),
+    RobotoMedium: require("../assets/fonts/Roboto-Medium.ttf"),
+    RobotoBold: require("../assets/fonts/Roboto-Bold.ttf"),
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
