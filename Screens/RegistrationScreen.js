@@ -8,10 +8,10 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Platform,
+  Keyboard,
 } from "react-native";
 import React, { useState } from "react";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import { useFonts } from "expo-font";
+import { useNavigation } from "@react-navigation/native";
 import { styles } from "../styles/RegistrationScreen.styles";
 
 const initialState = {
@@ -24,12 +24,6 @@ export const RegistrationScreen = () => {
   const [state, setState] = useState(initialState);
   const [isShowPassword, setIsShowPassword] = useState(true);
   const navigation = useNavigation();
-
-  const [fontsLoaded] = useFonts({
-    RobotoRegular: require("../assets/fonts/Roboto-Regular.ttf"),
-    RobotoMedium: require("../assets/fonts/Roboto-Medium.ttf"),
-    RobotoBold: require("../assets/fonts/Roboto-Bold.ttf"),
-  });
 
   const onRegister = () => {
     if (!state.email || !state.password || !state.userName) {
@@ -48,12 +42,8 @@ export const RegistrationScreen = () => {
     setIsShowPassword(!isShowPassword);
   };
 
-  if (!fontsLoaded) {
-    return null;
-  }
-
   return (
-    <TouchableWithoutFeedback>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
         <ImageBackground
           source={require("../assets/images/bg-photo.jpg")}

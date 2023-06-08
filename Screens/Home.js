@@ -13,7 +13,9 @@ export const Home = () => {
   const navigation = useNavigation();
 
   return (
-    <Tabs.Navigator screenOptions={{ tabBarShowLabel: false }}>
+    <Tabs.Navigator
+      screenOptions={{ tabBarShowLabel: false, headerTitleAlign: "center" }}
+    >
       <Tabs.Screen
         name="Posts"
         component={PostsScreen}

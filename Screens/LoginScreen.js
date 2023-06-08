@@ -11,7 +11,6 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { useFonts } from "expo-font";
 import { styles } from "../styles/LoginScreen.styles";
 
 const initialState = {
@@ -24,12 +23,6 @@ export const LoginScreen = () => {
   const navigation = useNavigation();
   const [state, setState] = useState(initialState);
   const [isShowPassword, setIsShowPassword] = useState(true);
-
-  const [fontsLoaded] = useFonts({
-    RobotoRegular: require("../assets/fonts/Roboto-Regular.ttf"),
-    RobotoMedium: require("../assets/fonts/Roboto-Medium.ttf"),
-    RobotoBold: require("../assets/fonts/Roboto-Bold.ttf"),
-  });
 
   const onLogin = () => {
     if (!state.email || !state.password) {
@@ -48,12 +41,8 @@ export const LoginScreen = () => {
     setIsShowPassword(!isShowPassword);
   };
 
-  if (!fontsLoaded) {
-    return null;
-  }
-
   return (
-    <TouchableWithoutFeedback>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
         <ImageBackground
           source={require("../assets/images/bg-photo.jpg")}
