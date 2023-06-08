@@ -13,7 +13,6 @@ export const styles = StyleSheet.create({
 
     top: 0,
     left: 0,
-    // transform: [{ translateX: -196 }, { translateY: -415 }],
     transform: [{ translateX: -196 }],
 
     flex: 1,
@@ -64,7 +63,6 @@ export const styles = StyleSheet.create({
     paddingLeft: 12,
     borderRadius: 8,
     fontFamily: "RobotoRegular",
-    // fontWeight: 400,
     fontSize: 16,
     lineHeight: 19,
   },
@@ -83,7 +81,6 @@ export const styles = StyleSheet.create({
     paddingLeft: 12,
     borderRadius: 8,
     fontFamily: "RobotoRegular",
-    // fontWeight: 400,
     fontSize: 16,
     lineHeight: 19,
   },
@@ -96,7 +93,6 @@ export const styles = StyleSheet.create({
 
   showPasswordText: {
     fontFamily: "RobotoRegular",
-    // fontWeight: 400,
     fontSize: 16,
     lineHeight: 19,
     color: "#1B4371",
@@ -116,7 +112,6 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
     color: "#FFFFFF",
     fontFamily: "RobotoRegular",
-    // fontWeight: 400,
     fontSize: 16,
     lineHeight: 19,
   },
@@ -124,7 +119,6 @@ export const styles = StyleSheet.create({
   textRegisterQuestion: {
     textAlign: "center",
     fontFamily: "RobotoRegular",
-    // fontWeight: 400,
     fontSize: 16,
     lineHeight: 19,
     color: "#1B4371",
@@ -135,7 +129,6 @@ export const styles = StyleSheet.create({
     textDecorationLine: "underline",
     textDecorationStyle: "solid",
     fontFamily: "RobotoRegular",
-    // fontWeight: 400,
     fontSize: 16,
     lineHeight: 19,
     color: "#1B4371",

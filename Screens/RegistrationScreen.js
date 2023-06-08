@@ -1,18 +1,16 @@
 import {
-  StyleSheet,
   View,
   Image,
   ImageBackground,
   Text,
   TextInput,
-  Button,
   TouchableOpacity,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
-  Keyboard,
   Platform,
 } from "react-native";
 import React, { useState } from "react";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { styles } from "../styles/RegistrationScreen.styles";
 
@@ -25,6 +23,7 @@ const initialState = {
 export const RegistrationScreen = () => {
   const [state, setState] = useState(initialState);
   const [isShowPassword, setIsShowPassword] = useState(true);
+  const navigation = useNavigation();
 
   const [fontsLoaded] = useFonts({
     RobotoRegular: require("../assets/fonts/Roboto-Regular.ttf"),
@@ -33,8 +32,16 @@ export const RegistrationScreen = () => {
   });
 
   const onRegister = () => {
+    if (!state.email || !state.password || !state.userName) {
+      console.log("Please, enter your credentials");
+      return;
+    }
     console.log(state);
     setState(initialState);
+    navigation.navigate("Home", {
+      userName: state.userName,
+      email: state.email,
+    });
   };
 
   const handlePasswordVisibility = () => {
@@ -46,7 +53,7 @@ export const RegistrationScreen = () => {
   }
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <TouchableWithoutFeedback>
       <View style={styles.container}>
         <ImageBackground
           source={require("../assets/images/bg-photo.jpg")}
@@ -70,22 +77,27 @@ export const RegistrationScreen = () => {
                   style={styles.input}
                   value={state.userName}
                   onChangeText={(text) =>
-                    setState({ ...state, userName: text })
+                    setState({ ...state, userName: text.trim() })
                   }
                   placeholder="Login"
                 ></TextInput>
                 <TextInput
                   style={styles.input}
                   value={state.email}
-                  onChangeText={(text) => setState({ ...state, email: text })}
+                  keyboardType="email-address"
+                  onChangeText={(text) =>
+                    setState({ ...state, email: text.trim() })
+                  }
                   placeholder="Email"
                 ></TextInput>
                 <View style={styles.passwordContainer}>
                   <TextInput
-                    style={styles.inputLast}
+                    style={styles.inputPassword}
                     secureTextEntry={!isShowPassword}
+                    minLength={8}
+                    maxLength={16}
                     onChangeText={(text) =>
-                      setState({ ...state, password: text })
+                      setState({ ...state, password: text.trim() })
                     }
                     value={state.password}
                     placeholder="Password"
@@ -104,7 +116,15 @@ export const RegistrationScreen = () => {
                 <Text style={styles.btnLabel}>Sign Up</Text>
               </TouchableOpacity>
               <View>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.textLogInContainer}
+                  onPress={() =>
+                    navigation.navigate("Login", {
+                      name: state.userName,
+                      email: state.email,
+                    })
+                  }
+                >
                   <Text style={styles.textLogIn}>
                     Already have an account? Log in
                   </Text>

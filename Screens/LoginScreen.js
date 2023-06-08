@@ -10,15 +10,18 @@ import {
   Platform,
 } from "react-native";
 import React, { useState } from "react";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { styles } from "../styles/LoginScreen.styles";
 
 const initialState = {
+  userName: "",
   email: "",
   password: "",
 };
 
 export const LoginScreen = () => {
+  const navigation = useNavigation();
   const [state, setState] = useState(initialState);
   const [isShowPassword, setIsShowPassword] = useState(true);
 
@@ -29,8 +32,16 @@ export const LoginScreen = () => {
   });
 
   const onLogin = () => {
+    if (!state.email || !state.password) {
+      console.log("Please, enter your credentials");
+      return;
+    }
     console.log(state);
     setState(initialState);
+    navigation.navigate("Home", {
+      userName: state.userName,
+      email: state.email,
+    });
   };
 
   const handlePasswordVisibility = () => {
@@ -42,7 +53,7 @@ export const LoginScreen = () => {
   }
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <TouchableWithoutFeedback>
       <View style={styles.container}>
         <ImageBackground
           source={require("../assets/images/bg-photo.jpg")}
@@ -58,16 +69,19 @@ export const LoginScreen = () => {
               <View style={styles.inputsContainer}>
                 <TextInput
                   style={styles.input}
-                  onChangeText={(text) => setState({ ...state, email: text })}
+                  onChangeText={(text) =>
+                    setState({ ...state, email: text.trim() })
+                  }
                   value={state.email}
                   placeholder="Email"
+                  keyboardType="email-address"
                 ></TextInput>
                 <View style={styles.passwordContainer}>
                   <TextInput
                     style={styles.inputLast}
                     value={state.password}
                     onChangeText={(text) =>
-                      setState({ ...state, password: text })
+                      setState({ ...state, password: text.trim() })
                     }
                     placeholder="Password"
                     textContentType="password"
@@ -87,7 +101,10 @@ export const LoginScreen = () => {
                 <Text style={styles.btnLabel}>Log In</Text>
               </TouchableOpacity>
               <View>
-                <TouchableOpacity style={styles.textLogInContainer}>
+                <TouchableOpacity
+                  style={styles.textLogInContainer}
+                  onPress={() => navigation.navigate("Registration")}
+                >
                   <Text style={styles.textRegisterQuestion}>
                     Don't have an account?{" "}
                     <Text style={styles.textRegister}>Register</Text>

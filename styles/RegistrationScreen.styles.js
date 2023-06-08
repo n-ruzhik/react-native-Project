@@ -8,12 +8,12 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+
   image: {
     position: "absolute",
 
     top: 0,
     left: 0,
-    // transform: [{ translateX: -196 }, { translateY: -415 }],
     transform: [{ translateX: -196 }],
 
     flex: 1,
@@ -22,6 +22,7 @@ export const styles = StyleSheet.create({
     height: 830,
     resizeMode: "cover",
   },
+
   containerForm: {
     position: "relative",
   },
@@ -30,7 +31,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     position: "absolute",
     transform: [{ translateX: -196 }, { translateY: -115 }],
-
     width: 393,
     height: 566,
     borderTopRightRadius: 25,
@@ -86,7 +86,6 @@ export const styles = StyleSheet.create({
     paddingLeft: 12,
     borderRadius: 8,
     fontFamily: "RobotoRegular",
-    // fontWeight: 400,
     fontSize: 16,
     lineHeight: 19,
   },
@@ -95,17 +94,16 @@ export const styles = StyleSheet.create({
     position: "relative",
   },
 
-  inputLast: {
+  inputPassword: {
     width: 344,
     height: 50,
     color: "#212121",
-    backgroundColor: "#F6F6F6",
+    backgroundColor: "#f6f6f6",
     alignSelf: "center",
     marginBottom: 0,
     paddingLeft: 12,
     borderRadius: 8,
     fontFamily: "RobotoRegular",
-    // fontWeight: 400,
     fontSize: 16,
     lineHeight: 19,
   },
@@ -118,7 +116,6 @@ export const styles = StyleSheet.create({
 
   showPasswordText: {
     fontFamily: "RobotoRegular",
-    //   fontWeight: 400,
     fontSize: 16,
     lineHeight: 19,
     color: "#1B4371",
@@ -138,7 +135,6 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
     color: "#FFFFFF",
     fontFamily: "RobotoRegular",
-    //   fontWeight: 400,
     fontSize: 16,
     lineHeight: 19,
   },
@@ -146,7 +142,6 @@ export const styles = StyleSheet.create({
   textLogIn: {
     textAlign: "center",
     fontFamily: "RobotoRegular",
-    //   fontWeight: 400,
     fontSize: 16,
     lineHeight: 19,
     color: "#1B4371",
