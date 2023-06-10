@@ -30,4 +30,70 @@ export const styles = StyleSheet.create({
   userdataThumb: {
     alignSelf: "center",
   },
+
+  postsBox: {
+    flexDirection: "column",
+    gap: 32,
+  },
+
+  postCard: {
+    gap: 8,
+    width: "100%",
+    height: 299,
+  },
+
+  postImg: {
+    height: 240,
+    width: "100%",
+    borderRadius: 16,
+
+    backgroundColor: "#F6F6F6",
+  },
+
+  postTitle: {
+    fontFamily: "RobotoMedium",
+    fontWeight: 500,
+    fontSize: 16,
+    lineHeight: 19,
+
+    color: "#212121",
+  },
+
+  infoThumb: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  comment: {
+    flexDirection: "row",
+    gap: 6,
+    alignItems: "center",
+  },
+
+  iconComment: {
+    height: 24,
+    width: 24,
+  },
+
+  commentInfo: {
+    fontFamily: "RobotoRegular",
+    fontSize: 16,
+    lineHeight: 19,
+    color: "#bdbdbd",
+  },
+
+  location: {
+    flexDirection: "row",
+    gap: 4,
+    alignItems: "center",
+  },
+
+  locationInfo: {
+    fontFamily: "RobotoRegular",
+    fontSize: 16,
+    lineHeight: 19,
+    textDecorationLine: "underline",
+    color: "#212121",
+  },
 });

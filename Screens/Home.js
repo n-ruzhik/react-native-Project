@@ -6,6 +6,8 @@ import { styles } from "../styles/Home.styles";
 import { PostsScreen } from "./PostsScreen";
 import { CreatePostsScreen } from "./CreatePostsScreen";
 import { ProfileScreen } from "./ProfileScreen";
+import { CommentsScreen } from "./CommentsScreen";
+import { MapScreen } from "./MapScreen";
 
 const Tabs = createBottomTabNavigator();
 
@@ -84,6 +86,62 @@ export const Home = () => {
                 title="log out"
                 source={require("../assets/images/logout.png")}
               />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="Comments"
+        component={CommentsScreen}
+        options={{
+          tabBarButton: () => null,
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("Posts", {
+                  url: "",
+                  title: "",
+                  locationTitle: "",
+                })
+              }
+            >
+              <Image
+                source={require("../assets/images/arrow-left.png")}
+                style={{
+                  width: 24,
+                  height: 24,
+                  marginRight: 16,
+                  marginLeft: 16,
+                }}
+              ></Image>
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="Map"
+        component={MapScreen}
+        options={{
+          tabBarButton: () => null,
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("Posts", {
+                  url: "",
+                  title: "",
+                  locationTitle: "",
+                })
+              }
+            >
+              <Image
+                source={require("../assets/images/arrow-left.png")}
+                style={{
+                  width: 24,
+                  height: 24,
+                  marginRight: 16,
+                  marginLeft: 16,
+                }}
+              ></Image>
             </TouchableOpacity>
           ),
         }}

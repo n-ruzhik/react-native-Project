@@ -21,15 +21,11 @@ export const CreatePostsScreen = () => {
 
   const [postTitle, setPostTitle] = useState(null);
   const [location, setLocation] = useState(null);
+  const [locationTitle, setLocationTitle] = useState("");
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraRef, setCameraRef] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
-  const [photo, setPhoto] = useState(null);
-  const [showMap, setShowMap] = useState("false");
-
-  const onShowMap = () => {
-    setShowMap(true);
-  };
+  const [photo, setPhoto] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -46,15 +42,13 @@ export const CreatePostsScreen = () => {
       }
 
       let location = await Location.getCurrentPositionAsync({});
-      console.log(location);
       const coords = {
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
       };
-      console.log(coords);
+
       setLocation(coords);
     })();
-    setShowMap(false);
   }, []);
 
   if (hasPermission === null) {
@@ -65,8 +59,9 @@ export const CreatePostsScreen = () => {
   }
 
   const resetData = () => {
-    setPhoto(null);
-    setPostTitle(null);
+    setPhoto("");
+    setPostTitle("");
+    setLocationTitle("");
     setLocation(null);
   };
 
@@ -77,6 +72,7 @@ export const CreatePostsScreen = () => {
       }}
     >
       <View style={styles.container}>
+        {/* Camera-------------------------------------- */}
         <View style={styles.photoThumb}>
           <View style={styles.photoImg}>
             {photo ? (
@@ -131,6 +127,7 @@ export const CreatePostsScreen = () => {
           )}
         </View>
 
+        {/* Inputs -------------------------------------- */}
         <View style={styles.inputsContainer}>
           <TextInput
             style={styles.inputTitle}
@@ -141,7 +138,8 @@ export const CreatePostsScreen = () => {
           <TextInput
             style={styles.inputLocation}
             name="location"
-            onChangeText={(text) => setLocation(text)}
+            onChangeText={(text) => setLocationTitle(text)}
+            value={locationTitle}
             placeholder={"choose a location"}
           ></TextInput>
           <TouchableOpacity style={styles.iconLocation}>
@@ -149,14 +147,16 @@ export const CreatePostsScreen = () => {
           </TouchableOpacity>
         </View>
 
-        {photo ? (
+        {/* PostBtn -------------------------------------- */}
+        {photo !== "" ? (
           <TouchableOpacity
             style={styles.postBtnActive}
             onPress={() => {
               navigation.navigate("Posts", {
                 url: photo,
                 title: postTitle,
-                location: location,
+                locationTitle: locationTitle,
+                location,
               });
               resetData();
             }}
@@ -168,6 +168,8 @@ export const CreatePostsScreen = () => {
             <Text style={styles.btnText}>Post</Text>
           </TouchableOpacity>
         )}
+
+        {/* TrashBtn -------------------------------------- */}
         <TouchableOpacity style={styles.deleteBtn} onPress={resetData}>
           <Image
             source={require("../assets/images/trash.png")}

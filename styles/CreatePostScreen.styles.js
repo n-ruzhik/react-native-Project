@@ -169,6 +169,4 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: "#f6f6f6",
   },
-
-  // ---------------------
 });
