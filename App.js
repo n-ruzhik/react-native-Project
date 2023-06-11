@@ -1,15 +1,11 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet } from "react-native";
-
 import "react-native-gesture-handler";
-import { useFonts } from "expo-font";
-import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
-import { RegistrationScreen } from "./Screens/RegistrationScreen";
-import { LoginScreen } from "./Screens/LoginScreen";
-import { Home } from "./Screens/Home";
+import { Provider } from "react-redux";
+import { store, persistor } from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
 
-const MainStack = createStackNavigator();
+import { useFonts } from "expo-font";
+
+import { Home } from "./Screens/Home";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -22,17 +18,10 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <MainStack.Navigator
-        initialRouteName="Login"
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
-        <MainStack.Screen name="Registration" component={RegistrationScreen} />
-        <MainStack.Screen name="Login" component={LoginScreen} />
-        <MainStack.Screen name="Home" component={Home} />
-      </MainStack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Home />
+      </PersistGate>
+    </Provider>
   );
 }

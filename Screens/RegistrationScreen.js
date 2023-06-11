@@ -13,9 +13,11 @@ import {
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "../styles/RegistrationScreen.styles";
+import { useDispatch } from "react-redux";
+import { registration } from "../redux/auth/operations";
 
 const initialState = {
-  userName: "",
+  login: "",
   email: "",
   password: "",
 };
@@ -24,18 +26,16 @@ export const RegistrationScreen = () => {
   const [state, setState] = useState(initialState);
   const [isShowPassword, setIsShowPassword] = useState(true);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const onRegister = () => {
-    if (!state.email || !state.password || !state.userName) {
+    if (!state.email || !state.password || !state.login) {
       console.log("Please, enter your credentials");
       return;
     }
     console.log(state);
+    dispatch(registration(state));
     setState(initialState);
-    navigation.navigate("Home", {
-      userName: state.userName,
-      email: state.email,
-    });
   };
 
   const handlePasswordVisibility = () => {
@@ -67,7 +67,7 @@ export const RegistrationScreen = () => {
                   style={styles.input}
                   value={state.userName}
                   onChangeText={(text) =>
-                    setState({ ...state, userName: text.trim() })
+                    setState({ ...state, login: text.trim() })
                   }
                   placeholder="Login"
                 ></TextInput>
@@ -108,12 +108,7 @@ export const RegistrationScreen = () => {
               <View>
                 <TouchableOpacity
                   style={styles.textLogInContainer}
-                  onPress={() =>
-                    navigation.navigate("Login", {
-                      name: state.userName,
-                      email: state.email,
-                    })
-                  }
+                  onPress={() => navigation.navigate("Login")}
                 >
                   <Text style={styles.textLogIn}>
                     Already have an account? Log in

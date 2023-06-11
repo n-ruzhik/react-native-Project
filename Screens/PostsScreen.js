@@ -1,33 +1,40 @@
-import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
+import { db } from "../config";
+import {
+  selectUserName,
+  selectUserId,
+  selectEmail,
+} from "../redux/auth/selectors";
+import { useSelector } from "react-redux";
 
 import { styles } from "../styles/PostsScreen.styles";
 
 export const PostsScreen = () => {
   const navigation = useNavigation();
   const [postArr, setPostArr] = useState([]);
-  const [image, setImage] = useState("");
-  const [postTitle, setPostTitle] = useState("");
-  const [postLocation, setPostLocation] = useState("");
 
-  const {
-    params: { url, title = "", locationTitle = "", location },
-  } = useRoute();
+  const userId = useSelector(selectUserId);
+  const userName = useSelector(selectUserName);
+  const userEmail = useSelector(selectEmail);
 
   useEffect(() => {
-    setPostTitle(title), setImage(url), setPostLocation(locationTitle);
-  }, [title, url, locationTitle]);
-
-  useEffect(() => {
-    if (postTitle !== "" && image !== "" && postLocation !== "") {
-      const newPostCard = { postTitle, image, postLocation };
-      setPostArr((prevState) => [newPostCard, ...prevState]);
-    }
-  }, [postTitle, image, postLocation]);
+    const postsCollection = query(
+      collection(db, "posts"),
+      where("userId", "==", userId)
+    );
+    onSnapshot(postsCollection, (querySnapshot) => {
+      const postArray = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setPostArr(postArray);
+    });
+  }, []);
 
   return (
-    <ScrollView style={styles.postsThumb}>
+    <View style={styles.postsThumb}>
       {/* User-------------------------------------- */}
       <View style={styles.userThumb}>
         <View style={styles.photoThumb}>
@@ -37,8 +44,8 @@ export const PostsScreen = () => {
           ></Image>
         </View>
         <View style={styles.userdataThumb}>
-          <Text tyle={styles.userNameRow}>user</Text>
-          <Text>email</Text>
+          <Text tyle={styles.userNameRow}>{userName}</Text>
+          <Text>{userEmail}</Text>
         </View>
       </View>
 
@@ -86,6 +93,6 @@ export const PostsScreen = () => {
             </View>
           ))}
       </View>
-    </ScrollView>
+    </View>
   );
 };

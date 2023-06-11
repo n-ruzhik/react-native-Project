@@ -11,10 +11,11 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { logIn } from "../redux/auth/operations";
 import { styles } from "../styles/LoginScreen.styles";
 
 const initialState = {
-  userName: "",
   email: "",
   password: "",
 };
@@ -23,6 +24,7 @@ export const LoginScreen = () => {
   const navigation = useNavigation();
   const [state, setState] = useState(initialState);
   const [isShowPassword, setIsShowPassword] = useState(true);
+  const dispatch = useDispatch();
 
   const onLogin = () => {
     if (!state.email || !state.password) {
@@ -30,11 +32,8 @@ export const LoginScreen = () => {
       return;
     }
     console.log(state);
+    dispatch(logIn(state));
     setState(initialState);
-    navigation.navigate("Home", {
-      userName: state.userName,
-      email: state.email,
-    });
   };
 
   const handlePasswordVisibility = () => {
